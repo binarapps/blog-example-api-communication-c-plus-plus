@@ -21,14 +21,9 @@ void DataSender::setData(const QString &name, const QString &text, const QString
 QHttpMultiPart * DataSender::prepareMultipart()
 {
     QHttpMultiPart * multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
-    QHttpPart utf8part;
-    utf8part.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"utf8\""));
-    utf8part.setBody("✓");
-    multiPart->append(utf8part);
 
     multiPart->append(createPart("form-data; name=\"entry[name]\"", this->name));
     multiPart->append(createPart("form-data; name=\"entry[text]\"", this->text));
-    multiPart->append(createPart("form-data; name=\"commit\"", "Submit"));
 
     QFile file(this->filepath);
     file.open(QIODevice::ReadOnly);
