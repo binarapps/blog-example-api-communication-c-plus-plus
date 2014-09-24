@@ -21,9 +21,9 @@ void DataSender::setData(const QString &name, const QString &text, const QString
 QHttpMultiPart * DataSender::prepareMultipart()
 {
     QHttpMultiPart * multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
-
+multiPart->append(createPart("form-data; name=\"entry[text]\"", this->text));
     multiPart->append(createPart("form-data; name=\"entry[name]\"", this->name));
-    multiPart->append(createPart("form-data; name=\"entry[text]\"", this->text));
+
 
     QFile file(this->filepath);
     file.open(QIODevice::ReadOnly);
